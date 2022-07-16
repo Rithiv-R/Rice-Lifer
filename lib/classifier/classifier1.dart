@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:ricelife/classifier/classifier2.dart';
 
 class Classify extends StatefulWidget {
   const Classify({Key? key}) : super(key: key);
@@ -23,6 +25,37 @@ class _ClassifyState extends State<Classify> {
     'https://www.wikihow.com/images/thumb/3/34/1151588-10.jpg/aid1151588-v4-728px-1151588-10.jpg.webp',
     'https://www.wikihow.com/images/thumb/9/9a/1151588-11.jpg/aid1151588-v4-728px-1151588-11.jpg.webp',
   ];
+
+  var _image;
+
+  Future getimage(bool isCamera) async {
+    XFile image;
+    final imgpic = ImagePicker();
+    if (isCamera) {
+      image = (await imgpic.pickImage(source: ImageSource.camera))!;
+    } else {
+      image = (await imgpic.pickImage(source: ImageSource.gallery))!;
+    }
+    setState(() {
+      _image = image;
+    });
+    if (_image != null) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Classify1(
+                    image: _image,
+                  )));
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _image = null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,7 +188,9 @@ class _ClassifyState extends State<Classify> {
                       child: MaterialButton(
                         height: 150,
                         minWidth: 150,
-                        onPressed: () {},
+                        onPressed: () {
+                          getimage(false);
+                        },
                         color: Color(0xFF27C87A),
                         splashColor: Color(0xFF27C57A),
                         child: Column(
@@ -188,7 +223,9 @@ class _ClassifyState extends State<Classify> {
                         height: 150,
                         minWidth: 150,
                         clipBehavior: Clip.hardEdge,
-                        onPressed: () {},
+                        onPressed: () {
+                          getimage(true);
+                        },
                         color: Color(0xFF27C87A),
                         splashColor: Color(0xFF27C57A),
                         child: Column(

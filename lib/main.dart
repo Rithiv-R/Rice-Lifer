@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ricelife/Agro/agroshop.dart';
+import 'package:ricelife/Home/home.dart';
 import 'package:ricelife/authentication/signin.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:ricelife/authentication/signup.dart';
@@ -22,6 +23,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Classify();
+    return Welcome();
   }
 }
