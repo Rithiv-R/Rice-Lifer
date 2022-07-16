@@ -30,6 +30,8 @@ class Shopmodel {
 class _AgroShopState extends State<AgroShop> {
   List<Shopmodel> model1 = [];
   List<Shopmodel> model = [];
+  var lat;
+  var long;
   @override
   void initState() {
     // TODO: implement initState
@@ -77,6 +79,8 @@ class _AgroShopState extends State<AgroShop> {
       }
       setState(() {
         model = model1;
+        this.lat = position.latitude;
+        this.long = position.longitude;
       });
     });
   }
@@ -95,149 +99,156 @@ class _AgroShopState extends State<AgroShop> {
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
                     children: <Widget>[
-                      InkWell(
-                        splashColor: Colors.black54,
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        model[index].name.toUpperCase(),
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20,
-                                            color: Colors.white),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Container(
-                                      child: Row(
-                                    children: <Widget>[
-                                      Icon(Icons.location_city),
-                                      Text(
-                                        ':',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Expanded(
-                                        child: Text(
-                                          model[index].address,
+                      GestureDetector(
+                        onTap: () {},
+                        child: InkWell(
+                          splashColor: Colors.black54,
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          model[index].name.toUpperCase(),
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20,
+                                              color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                        child: Row(
+                                      children: <Widget>[
+                                        Icon(Icons.location_city),
+                                        Text(
+                                          ':',
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 16),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                    ],
-                                  )),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Container(
-                                        height: 150,
-                                        width: 200,
-                                        child: Image.network(
-                                          model[index].image,
-                                          fit: BoxFit.cover,
+                                        SizedBox(
+                                          width: 5,
                                         ),
-                                      ),
-                                      Container(
-                                          child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Row(
-                                            children: <Widget>[
-                                              Icon(Icons.social_distance),
-                                              Text(
-                                                ':',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                model[index].distance + 'Ms',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16),
-                                              ),
-                                            ],
+                                        Expanded(
+                                          child: Text(
+                                            model[index].address,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16),
                                           ),
-                                          SizedBox(
-                                            height: 20,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                      ],
+                                    )),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Container(
+                                          height: 150,
+                                          width: 200,
+                                          child: Image.network(
+                                            model[index].image,
+                                            fit: BoxFit.cover,
                                           ),
-                                          Row(
-                                            children: <Widget>[
-                                              Icon(Icons.phone_android),
-                                              Text(
-                                                ':',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                model[index].phone,
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16),
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      )),
-                                    ],
-                                  ),
-                                ],
+                                        ),
+                                        Container(
+                                            child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Row(
+                                              children: <Widget>[
+                                                Icon(Icons.social_distance),
+                                                Text(
+                                                  ':',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 16),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  model[index].distance + 'ms',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 16),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Row(
+                                              children: <Widget>[
+                                                Icon(Icons.phone_android),
+                                                Text(
+                                                  ':',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 16),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  model[index].phone,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 16),
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        )),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            decoration: BoxDecoration(
-                                gradient: (index % 2 == 0)
-                                    ? LinearGradient(
-                                        begin: Alignment.topRight,
-                                        end: Alignment.bottomLeft,
-                                        colors: [
-                                            Colors.white,
-                                            Colors.lightGreen
-                                          ])
-                                    : LinearGradient(
-                                        begin: Alignment.topRight,
-                                        end: Alignment.bottomLeft,
-                                        colors: [
-                                            Colors.orangeAccent,
-                                            Colors.white
-                                          ]))),
+                              decoration: BoxDecoration(
+                                  gradient: (index % 2 == 0)
+                                      ? LinearGradient(
+                                          begin: Alignment.topRight,
+                                          end: Alignment.bottomLeft,
+                                          colors: [
+                                              Colors.white,
+                                              Colors.lightGreen
+                                            ])
+                                      : LinearGradient(
+                                          begin: Alignment.topRight,
+                                          end: Alignment.bottomLeft,
+                                          colors: [
+                                              Colors.orangeAccent,
+                                              Colors.white
+                                            ]))),
+                        ),
                       ),
                       SizedBox(
                         height: 20,
