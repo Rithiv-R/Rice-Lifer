@@ -1,6 +1,6 @@
 # Rice Lifer
 
-ndia is the world's second-largest producer of rice and the largest exporter of rice in the world. Production increased from 53.6 million tons in FY 1980 to 120 million tons in FY2020-21
+India is the world's second-largest producer of rice and the largest exporter of rice in the world. Production increased from 53.6 million tons in FY 1980 to 120 million tons in FY2020-21
 
 In India a study says that 30 percent of marginal and small farmers are still illiterate. 
 
