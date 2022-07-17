@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ricelife/Agro/agroshop.dart';
 import 'package:ricelife/Home/home.dart';
 import 'package:ricelife/authentication/signup.dart';
+import 'package:ricelife/splasher/splash.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -78,7 +79,7 @@ class _SignInState extends State<SignIn> {
             children: <Widget>[
               Column(
                 children: <Widget>[
-                   Text(
+                  Text(
                     'RICE-LIFER',
                     style: GoogleFonts.oleoScript(
                       textStyle: TextStyle(
@@ -192,7 +193,7 @@ class _SignInState extends State<SignIn> {
                                     email: email, password: password)
                                 .then((_) => Navigator.of(context)
                                         .push(MaterialPageRoute(
-                                      builder: (context) => Welcome(),
+                                      builder: (context) => SplashScreen(),
                                     )));
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'user-not-found') {

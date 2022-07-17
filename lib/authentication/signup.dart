@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ricelife/Agro/agroshop.dart';
 import 'package:ricelife/Home/home.dart';
 import 'package:ricelife/authentication/signin.dart';
+import 'package:ricelife/splasher/splash.dart';
 import 'dart:io';
 import '../api/Firebaseapi.dart';
 
@@ -362,7 +363,7 @@ class _SignupState extends State<Signup> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Welcome()));
+                                                    SplashScreen()));
                                       });
                                     });
                                   } on FirebaseAuthException catch (e) {

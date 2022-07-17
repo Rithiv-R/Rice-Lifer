@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ricelife/Agro/agroshop.dart';
 import 'package:ricelife/History/history1.dart';
 import 'package:ricelife/Profile/profile1.dart';
+import 'package:ricelife/authentication/signin.dart';
 
 import '../classifier/classifier1.dart';
 
@@ -22,6 +25,25 @@ class _WelcomeState extends State<Welcome> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
+        actions: [
+          GestureDetector(
+            onTap: () {
+              FirebaseAuth.instance.signOut().then((value) {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => SignIn()));
+              });
+            },
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                'SIGNOUT',
+                style: TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       body: Container(
         decoration: BoxDecoration(

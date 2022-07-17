@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'history2.dart';
+
 class History1 extends StatefulWidget {
   const History1({Key? key}) : super(key: key);
 
@@ -82,36 +84,46 @@ class _History1State extends State<History1> {
                 : Container(
                     child: ListView.builder(
                       itemCount: myarray.length,
-                      itemBuilder: (context, index) => Container(
-                        child: Material(
-                          color: Colors.transparent,
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              children: [
-                                Divider(
-                                  thickness: 2,
-                                ),
-                                SizedBox(
-                                  height: 3,
-                                ),
-                                ListTile(
-                                  leading: Icon(
-                                    Icons.folder,
-                                    color: Color(0xfffccc77),
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => History2(
+                                        filename: myarray[index],
+                                      )));
+                        },
+                        child: Container(
+                          child: Material(
+                            color: Colors.transparent,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Column(
+                                children: [
+                                  Divider(
+                                    thickness: 2,
                                   ),
-                                  title: Text(myarray[index]),
-                                ),
-                                SizedBox(
-                                  height: 2,
-                                ),
-                                Divider(
-                                  thickness: 2,
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                              ],
+                                  SizedBox(
+                                    height: 3,
+                                  ),
+                                  ListTile(
+                                    leading: Icon(
+                                      Icons.folder,
+                                      color: Color(0xfffccc77),
+                                    ),
+                                    title: Text(myarray[index]),
+                                  ),
+                                  SizedBox(
+                                    height: 2,
+                                  ),
+                                  Divider(
+                                    thickness: 2,
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
