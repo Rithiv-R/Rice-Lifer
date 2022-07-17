@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ricelife/Agro/agroshop.dart';
+import 'package:ricelife/Home/home.dart';
 import 'package:ricelife/authentication/signup.dart';
 
 class SignIn extends StatefulWidget {
@@ -76,12 +78,13 @@ class _SignInState extends State<SignIn> {
             children: <Widget>[
               Column(
                 children: <Widget>[
-                  Text(
-                    "Log-In",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                   Text(
+                    'RICE-LIFER',
+                    style: GoogleFonts.oleoScript(
+                      textStyle: TextStyle(
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -189,7 +192,7 @@ class _SignInState extends State<SignIn> {
                                     email: email, password: password)
                                 .then((_) => Navigator.of(context)
                                         .push(MaterialPageRoute(
-                                      builder: (context) => AgroShop(),
+                                      builder: (context) => Welcome(),
                                     )));
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'user-not-found') {

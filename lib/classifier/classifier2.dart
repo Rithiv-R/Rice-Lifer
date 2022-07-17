@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ricelife/api/Firebaseapi.dart';
+import 'package:ricelife/classifier/result.dart';
 import 'package:tflite/tflite.dart';
 
 class Classify1 extends StatefulWidget {
@@ -16,28 +18,53 @@ class Classify1 extends StatefulWidget {
 }
 
 class _Classify1State extends State<Classify1> {
+  var email;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     loadModel();
+    email = FirebaseAuth.instance.currentUser!.email;
   }
 
   var url;
 
-  Future upload(var image) async {
+  Future upload(var image, var results) async {
+    var date = DateTime.now().toString().substring(0, 10);
     File s = File(image.path);
-    final filename = Timestamp.now();
-    final destination = '19MIC0113/$filename';
+    final time = DateTime.now().hour.toString() +
+        'hr-' +
+        DateTime.now().minute.toString() +
+        'min-' +
+        DateTime.now().second.toString() +
+        'sec';
+    final destination = 'history/$email/$date/$time';
     var task = FirebaseApi.uploadFile(destination, s);
     if (task == null) {
       return;
     } else {
       final snapshot = await task.whenComplete(() {});
       final urlDownload = await snapshot.ref.getDownloadURL();
-      setState(() {
-        this.url = urlDownload;
-      });
+      FirebaseFirestore.instance
+          .collection('history')
+          .doc(email)
+          .collection(date)
+          .doc(time.toString())
+          .set({
+        'url': urlDownload,
+        'result': results,
+        'time': DateTime.now().hour.toString() +
+            'hr-' +
+            DateTime.now().minute.toString() +
+            'min-' +
+            DateTime.now().second.toString() +
+            'sec',
+      }).then((value) => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      Result(finalresult: results, image: image.path))));
     }
   }
 
@@ -45,8 +72,8 @@ class _Classify1State extends State<Classify1> {
     var output = await Tflite.runModelOnImage(
       path: image.path,
     );
-    print("predict = " + output.toString());
-    print(output![0]['label']);
+    print(output);
+    upload(image, output![0]['label']);
   }
 
   loadModel() async {

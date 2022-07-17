@@ -89,10 +89,22 @@ class _AgroShopState extends State<AgroShop> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Agro Near By'),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back_sharp,
+            color: Colors.black,
+            size: 25,
+          ),
+        ),
       ),
       body: model.length != 0
           ? Container(
+              color: Colors.white,
               padding: EdgeInsets.all(10),
               child: ListView.builder(
                 itemCount: model.length,

@@ -5,8 +5,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ricelife/classifier/classifier2.dart';
 
 class Classify extends StatefulWidget {
-  const Classify({Key? key}) : super(key: key);
-
   @override
   State<Classify> createState() => _ClassifyState();
 }

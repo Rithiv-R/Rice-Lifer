@@ -1,12 +1,13 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ricelife/Agro/agroshop.dart';
+import 'package:ricelife/History/history1.dart';
+import 'package:ricelife/Profile/profile1.dart';
+
+import '../classifier/classifier1.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);
-
   @override
   _WelcomeState createState() => _WelcomeState();
 }
@@ -15,7 +16,7 @@ class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var cardStyle = GoogleFonts.rakkas(textStyle: TextStyle(fontSize: 18));
+    var cardStyle = GoogleFonts.rakkas(textStyle: TextStyle(fontSize: 15));
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -37,6 +38,30 @@ class _WelcomeState extends State<Welcome> {
               padding: EdgeInsets.all(10.0),
               child: Column(
                 children: <Widget>[
+                  Text(
+                    'RICE-LIFER',
+                    style: GoogleFonts.oleoScript(
+                      textStyle: TextStyle(
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(20),
+                    width: 200,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              'https://img.freepik.com/premium-vector/rice-bowl-with-chopstick-cartoon-vector-illustration-rice-food-flat-icon-outline_385450-1061.jpg?w=740'),
+                          fit: BoxFit.fill),
+                    ),
+                  ),
                   Expanded(
                     child: GridView.count(
                         crossAxisSpacing: 10,
@@ -44,7 +69,12 @@ class _WelcomeState extends State<Welcome> {
                         primary: true,
                         children: <Widget>[
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ProfilePage1()));
+                            },
                             splashColor: Colors.greenAccent,
                             focusColor: Colors.greenAccent,
                             borderRadius: BorderRadius.circular(15),
@@ -77,7 +107,12 @@ class _WelcomeState extends State<Welcome> {
                             ),
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Classify()));
+                            },
                             splashColor: Colors.greenAccent,
                             focusColor: Colors.greenAccent,
                             borderRadius: BorderRadius.circular(15),
@@ -110,7 +145,12 @@ class _WelcomeState extends State<Welcome> {
                             ),
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AgroShop()));
+                            },
                             splashColor: Colors.greenAccent,
                             focusColor: Colors.greenAccent,
                             borderRadius: BorderRadius.circular(15),
@@ -135,6 +175,44 @@ class _WelcomeState extends State<Welcome> {
                                   Expanded(
                                     child: Text(
                                       "AGRO NEAR BY",
+                                      style: cardStyle,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => History1()));
+                            },
+                            splashColor: Colors.greenAccent,
+                            focusColor: Colors.greenAccent,
+                            borderRadius: BorderRadius.circular(15),
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              elevation: 10,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                      height: 150,
+                                      child: Image.network(
+                                        'https://media.istockphoto.com/vectors/open-book-with-history-doodles-and-lettering-vector-id1092170968?k=6&m=1092170968&s=612x612&w=0&h=j_qReeZ6d-7T8fXChMTqHS3EAKc_WICk2XLLfwbonfQ=',
+                                        fit: BoxFit.cover,
+                                      )),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      "HISTORY",
                                       style: cardStyle,
                                     ),
                                   ),
