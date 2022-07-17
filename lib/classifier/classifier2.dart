@@ -29,6 +29,7 @@ class _Classify1State extends State<Classify1> {
   }
 
   var url;
+  var arrayupdate = [];
 
   Future upload(var image, var results) async {
     var date = DateTime.now().toString().substring(0, 10);
@@ -46,6 +47,26 @@ class _Classify1State extends State<Classify1> {
     } else {
       final snapshot = await task.whenComplete(() {});
       final urlDownload = await snapshot.ref.getDownloadURL();
+      FirebaseFirestore.instance
+          .collection('history')
+          .doc(email)
+          .get()
+          .then((value) {
+        setState(() {
+          arrayupdate = value.data()?['list'];
+          if (!arrayupdate.contains(date)) {
+            setState(() {
+              arrayupdate.add(date);
+              FirebaseFirestore.instance
+                  .collection('history')
+                  .doc(email)
+                  .update({
+                'list': arrayupdate,
+              });
+            });
+          }
+        });
+      });
       FirebaseFirestore.instance
           .collection('history')
           .doc(email)
